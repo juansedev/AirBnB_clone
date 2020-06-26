@@ -27,6 +27,14 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.base1.created_at, self.base1.updated_at)
         self.assertEqual(self.base2.created_at, self.base2.updated_at)
         self.assertNotEqual(self.base1.created_at, self.base2.created_at)
+        dict_test = {'id': '56d43177-cc5f-4d6c-a0c1-e167f8c27337',
+                     'created_at': '2017-09-28T21:03:54.052298',
+                     '__class__': 'BaseModel', 'my_number': 89,
+                     'updated_at': '2017-09-28T21:03:54.052302',
+                     'name': 'Holberton'}
+        base3 = BaseModel(**dict_test)
+        self.assertEqual(base3.id, dict_test.get("id"))
+        self.assertIs(type(base3.created_at), datetime.datetime)
 
     def test_str(self):
         """ Method to test __str__ method """
@@ -46,6 +54,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertCountEqual(keys, dict_b1)
         self.base1.name = "Holberton"
         self.base1.my_number = 89
+        new_d = self.base1.to_dict()
+        self.assertEqual(new_d["__class__"], "BaseModel")
         keys = ['id',
                 'created_at',
                 'updated_at',
@@ -54,3 +64,12 @@ class TestBaseModel(unittest.TestCase):
                 'my_number']
         dict_b1 = self.base1.to_dict()
         self.assertCountEqual(keys, dict_b1)
+
+    def test_update(self):
+        """ Method to test to save method """
+        date_old = self.base1.updated_at
+        self.base1.save()
+        self.assertNotEqual(date_old, self.base1.updated_at)
+        date_old = self.base1.updated_at
+        self.base1.save()
+        self.assertNotEqual(date_old, self.base1.updated_at)

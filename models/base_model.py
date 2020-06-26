@@ -9,11 +9,19 @@ import uuid
 class BaseModel:
     """This is the BaseModel class from which the other classes will inherit"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initialization"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        if kwargs:
+            for key, value in kwargs.items():
+                if key is not "__class__":
+                    if key is "created_at" or key is "updated_at":
+                        value = datetime.\
+                            strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         """String representation of an object"""

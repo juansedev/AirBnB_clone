@@ -2,8 +2,8 @@
 """In this module BaseModel class is created"""
 
 
+from datetime import datetime
 import uuid
-import datetime
 
 
 class BaseModel:
@@ -12,17 +12,17 @@ class BaseModel:
     def __init__(self):
         """Initialization"""
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.utcnow()
-        self.updated_at = datetime.datetime.utcnow()
+        self.created_at = datetime.now()
+        self.updated_at = self.created_at
 
     def __str__(self):
         """String representation of an object"""
         return "[{}] ({}) {}".\
-            format(type(self).__name__, self.id, self.to_dict())
+            format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Updates the current datetime of 'updated_at' field"""
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """Returns a dictionary with all keys/values of

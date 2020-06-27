@@ -14,11 +14,16 @@ class BaseModel:
         """Initialization"""
         if kwargs:
             for key, value in kwargs.items():
-                if key is not "__class__":
-                    if key is "created_at" or key is "updated_at":
-                        value = datetime.\
-                            strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                    setattr(self, key, value)
+                dic = {}
+                dic[key] = value
+                if key == "id":
+                    self.id = value
+                if key == "created_at":
+                    self.created_at = datetime.strptime(value,
+                                                        '%Y-%m-%dT%H:%M:%S.%f')
+                if key == "updated_at":
+                    self.updated_at = datetime.strptime(value,
+                                                        '%Y-%m-%dT%H:%M:%S.%f')
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -39,7 +44,7 @@ class BaseModel:
         """Returns a dictionary with all keys/values of
         __dict__ of the instance
         """
-        new_dict = dict(self.__dict__)
+        new_dict = self.__dict__.copy()
         new_dict['__class__'] = self.__class__.__name__
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()

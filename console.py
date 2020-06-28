@@ -7,9 +7,10 @@ from models import storage
 from models.engine.file_storage import FileStorage
 from shlex import split
 from models.base_model import BaseModel
+from models.user import User
 
 
-classes = {'BaseModel': BaseModel}
+classes = {'BaseModel': BaseModel, 'User': User}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -52,7 +53,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             storage.reload()
             for key, instance in storage.all().items():
-                if instance.__class__.__name__ == args[0] and instance.id == args[1]:
+                if instance.__class__.\
+                            __name__ == args[0] and instance.id == args[1]:
                     print(instance.__str__())
                     return
             print("** no instance found **")
@@ -69,7 +71,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             storage.reload()
             for key, instance in storage.all().items():
-                if instance.__class__.__name__ == args[0] and instance.id == args[1]:
+                if instance.__class__.\
+                            __name__ == args[0] and instance.id == args[1]:
                     del(storage.all()[key])
                     storage.save()
                     return
@@ -105,8 +108,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             storage.reload()
             for key, instance in inst_list.items():
-                if instance.__class__.__name__ == args[0] and instance.id == args[1]:
-                    if  len(args) == 2:
+                if instance.__class__.\
+                            __name__ == args[0] and instance.id == args[1]:
+                    if len(args) == 2:
                         print("** attribute name missing **")
                         return
                     elif len(args) == 3:

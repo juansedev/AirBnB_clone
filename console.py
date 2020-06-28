@@ -114,9 +114,7 @@ class HBNBCommand(cmd.Cmd):
                         return
                     else:
                         key_object = args[0] + "." + args[1]
-                        print(key_object)
                         object = inst_list[key_object]
-                        print("-> {}".format(inst_list[key_object]))
                         setattr(object, args[2], args[3])
                         object.save()
                         return

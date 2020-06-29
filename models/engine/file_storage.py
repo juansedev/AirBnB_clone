@@ -33,7 +33,7 @@ class FileStorage:
     def reload(self):
         """ Deserializes all the JSON file to an object """
         try:
-            with open(self.__file_path, "r" , encoding="utf-8") as jfile:
+            with open(self.__file_path, "r", encoding="utf-8") as jfile:
                 jsonf = json.load(jfile)
             for key, value in jsonf.items():
                 value = eval(value["__class__"])(**value)

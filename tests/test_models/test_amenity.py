@@ -6,6 +6,7 @@ from models.amenity import Amenity
 from models import amenity
 import pep8
 import unittest
+import os
 
 
 class TestAmenity(unittest.TestCase):
@@ -44,3 +45,12 @@ class TestAmenity(unittest.TestCase):
         '''check if my_model is an instance of BaseModel'''
         my_amenity = Amenity()
         self.assertIsInstance(my_amenity, Amenity)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/amenity.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/amenity.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/amenity.py', os.X_OK)
+        self.assertTrue(exe)

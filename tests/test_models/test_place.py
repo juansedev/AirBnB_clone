@@ -6,6 +6,7 @@ from models.place import Place
 from models import place
 import pep8
 import unittest
+import os
 
 
 class TestPlace(unittest.TestCase):
@@ -44,3 +45,12 @@ class TestPlace(unittest.TestCase):
         '''check if my_place is an instance of BaseModel'''
         my_place = Place()
         self.assertIsInstance(my_place, Place)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/place.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/place.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/place.py', os.X_OK)
+        self.assertTrue(exe)

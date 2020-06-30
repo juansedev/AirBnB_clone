@@ -6,6 +6,7 @@ from models.user import User
 from models import user
 import pep8
 import unittest
+import os
 
 
 class TestUser(unittest.TestCase):
@@ -44,3 +45,12 @@ class TestUser(unittest.TestCase):
         '''check if my_user is an instance of BaseModel'''
         my_user = User()
         self.assertIsInstance(my_user, User)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/user.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/user.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/user.py', os.X_OK)
+        self.assertTrue(exe)

@@ -6,6 +6,7 @@ from models.state import State
 from models import state
 import pep8
 import unittest
+import os
 
 
 class TestState(unittest.TestCase):
@@ -44,3 +45,12 @@ class TestState(unittest.TestCase):
         '''check if my_state is an instance of BaseModel'''
         my_state = State()
         self.assertIsInstance(my_state, State)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/state.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/state.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/state.py', os.X_OK)
+        self.assertTrue(exe)

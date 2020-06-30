@@ -6,6 +6,7 @@ from models.review import Review
 from models import review
 import pep8
 import unittest
+import os
 
 
 class TestReview(unittest.TestCase):
@@ -44,3 +45,12 @@ class TestReview(unittest.TestCase):
         '''check if my_review is an instance of BaseModel'''
         my_review = Review()
         self.assertIsInstance(my_review, Review)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/review.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/review.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/review.py', os.X_OK)
+        self.assertTrue(exe)

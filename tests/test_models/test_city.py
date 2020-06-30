@@ -6,6 +6,7 @@ from models.city import City
 from models import city
 import pep8
 import unittest
+import os
 
 
 class TestCity(unittest.TestCase):
@@ -44,3 +45,12 @@ class TestCity(unittest.TestCase):
         '''check if my_city is an instance of BaseModel'''
         my_city = City()
         self.assertIsInstance(my_city, City)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/city.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/city.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/city.py', os.X_OK)
+        self.assertTrue(exe)

@@ -7,6 +7,7 @@ from models import base_model
 import pep8
 import datetime
 import unittest
+import os
 
 
 class TestBaseModel(unittest.TestCase):
@@ -96,7 +97,7 @@ class TestBaseModel(unittest.TestCase):
         dict_b1 = self.base1.to_dict()
         self.assertCountEqual(keys, dict_b1)
 
-    def test_update(self):
+    def test_save(self):
         """ Method to test to   save method """
         date_old = self.base1.updated_at
         self.base1.save()
@@ -104,3 +105,12 @@ class TestBaseModel(unittest.TestCase):
         date_old = self.base1.updated_at
         self.base1.save()
         self.assertNotEqual(date_old, self.base1.updated_at)
+
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/base_model.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/base_model.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/base_model.py', os.X_OK)
+        self.assertTrue(exe)

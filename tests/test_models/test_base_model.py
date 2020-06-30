@@ -66,7 +66,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertCountEqual(keys, dict_b1)
 
     def test_update(self):
-        """ Method to test to save method """
+        """ Method to test to   save method """
         date_old = self.base1.updated_at
         self.base1.save()
         self.assertNotEqual(date_old, self.base1.updated_at)

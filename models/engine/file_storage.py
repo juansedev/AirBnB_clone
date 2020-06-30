@@ -44,5 +44,5 @@ class FileStorage:
             for key, value in jsonf.items():
                 value = eval(value["__class__"])(**value)
                 self.__objects[key] = value
-        except:
+        except FileNotFoundError:
             pass

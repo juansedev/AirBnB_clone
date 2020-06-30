@@ -6,6 +6,7 @@ from models.engine.file_storage import FileStorage
 from models.engine import file_storage
 import pep8
 import unittest
+import os
 
 
 class TestFile_Storage(unittest.TestCase):
@@ -40,7 +41,20 @@ class TestFile_Storage(unittest.TestCase):
         check = style.check_files([file_base])
         self.assertEqual(check.total_errors, 0, msg)
 
+    def test_permissions(self):
+        """ Test for check the permissions """
+        read = os.access('models/engine/file_storage.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/engine/file_storage.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/engine/file_storage.py', os.X_OK)
+        self.assertTrue(exe)
+
     def test_is_an_instance(self):
         '''check if my_model is an instance of BaseModel'''
         my_file = FileStorage()
         self.assertIsInstance(my_file, FileStorage)
+
+
+if __name__ == "__main__":
+    unittest.main()

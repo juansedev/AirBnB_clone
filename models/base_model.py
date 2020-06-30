@@ -14,8 +14,6 @@ class BaseModel:
         """Initialization"""
         if kwargs:
             for key, value in kwargs.items():
-                if key == "id":
-                    self.id = value
                 elif key == "created_at":
                     self.created_at = datetime.strptime(value,
                                                         '%Y-%m-%dT%H:%M:%S.%f')

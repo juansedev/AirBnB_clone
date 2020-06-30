@@ -4,7 +4,6 @@
 
 import cmd
 from models import storage
-from models.engine.file_storage import FileStorage
 from shlex import split
 from models.base_model import BaseModel
 from models.user import User
@@ -61,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
             storage.reload()
             for key, instance in storage.all().items():
                 if instance.__class__.\
-                            __name__ == args[0] and instance.id == args[1]:
+                        __name__ == args[0] and instance.id == args[1]:
                     print(instance.__str__())
                     return
             print("** no instance found **")
@@ -76,29 +75,30 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1:
             print("** instance id missing **")
         else:
-            storage.reload()
             for key, instance in storage.all().items():
                 if instance.__class__.\
-                            __name__ == args[0] and instance.id == args[1]:
+                        __name__ == args[0] and instance.id == args[1]:
                     del(storage.all()[key])
                     storage.save()
+                    storage.reload()
                     return
             print("** no instance found **")
 
     def do_all(self, arg):
         """ Prints str representation of instances """
+        inst_list = []
         args = split(arg)
         if args == []:
-            pass
-        elif args[0] not in classes:
-            print("** class doesn't exist **")
-        else:
-            storage.reload()
-            inst_list = []
+            for key, instance in storage.all().items():
+                inst_list.append(instance.__str__())
+            print(inst_list)
+        elif args[0] in classes:
             for key, instance in storage.all().items():
                 if instance.__class__.__name__ == args[0]:
                     inst_list.append(instance.__str__())
             print(inst_list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """ Update an instance baed on the class name
@@ -112,24 +112,20 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
         else:
-            storage.reload()
-            for key, instance in inst_list.items():
-                if instance.__class__.\
-                            __name__ == args[0] and instance.id == args[1]:
-                    if len(args) == 2:
-                        print("** attribute name missing **")
-                        return
-                    elif len(args) == 3:
-                        print("** value missing **")
-                        return
-                    else:
-                        key_object = args[0] + "." + args[1]
-                        object = inst_list[key_object]
-                        setattr(object, args[2], args[3])
-                        object.save()
-                        return
-            print("** no instance found **")
+            key_object = args[0] + "." + args[1]
+            if key_object in inst_list:
+                object = inst_list[key_object]
+                setattr(object, args[2], args[3])
+                storage.save()
+                storage.reload()
+            else:
+                print("** no instance found **")
+
 
 if __name__ == "__main__":
     """ Main method """

@@ -51,7 +51,7 @@ class TestBaseModel(unittest.TestCase):
         pass
 
     def test_init(self):
-        """ Method to test the initialization of instances"""
+        """ Method to test the initialization of instances """
         self.assertIs(type(self.base1.id), str)
         self.assertIs(type(self.base1.created_at), datetime.datetime)
         self.assertNotEqual(self.base1.id, self.base2.id)

@@ -33,6 +33,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """ This method work when the prompt is empty"""
         pass
 
     def do_create(self, arg):
@@ -131,4 +132,5 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
 if __name__ == "__main__":
+    """ Main method """
     HBNBCommand().cmdloop()

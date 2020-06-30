@@ -3,12 +3,43 @@
 
 
 from models.base_model import BaseModel
+from models import base_model
+import pep8
 import datetime
 import unittest
 
 
 class TestBaseModel(unittest.TestCase):
     """Class for test the BaseModel class"""
+
+    def test_docstring(self):
+        """ Method to test doctring module, class and func """
+        self.assertTrue(len(base_model.__doc__) > 0)
+        self.assertTrue(len(BaseModel.__doc__) > 0)
+        for fn in dir(BaseModel):
+            self.assertTrue(len(fn.__doc__) > 0)
+
+    def test_func_docstrings(self):
+        """Test for the presence of docstrings in BaseModel methods"""
+        for func in dir(BaseModel):
+            with self.subTest(function=func):
+                self.assertIsNot(
+                    func[1].__doc__,
+                    None,
+                    "{:s} method needs a docstring".format(func[0])
+                )
+                self.assertTrue(
+                    len(func[1].__doc__) > 1,
+                    "{:s} method needs a docstring".format(func[0])
+                )
+
+    def test_pep8(self):
+        """ Test for pep8 stylecode """
+        msg = "Found code style errors (and warning)."
+        style = pep8.StyleGuide(quiet=True)
+        file_base = 'models/base_model.py'
+        check = style.check_files([file_base])
+        self.assertEqual(check.total_errors, 0, msg)
 
     def setUp(self):
         """setUp Method"""

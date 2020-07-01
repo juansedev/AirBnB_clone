@@ -126,11 +126,44 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def count(self, namecl):
+        """ This method counts """
+        counter = 0
+        if namecl not in classes:
+            print("** class doesn't exist **")
+        else:
+            inst_list = storage.all()
+            for key, instance in inst_list.items():
+                if namecl == instance.__class__.__name__:
+                    counter += 1
+            print(counter)
+
     def default(self, arg):
         """ This method validates the command line input and executes it """
-        args = split(arg.replace(".", " "))
-        if args[1] == 'all()':
+        command = arg.split(".")
+        do_cmd = command[1][0:command[1].find('("')]
+        id_obj = command[1][command[1].find('("') + 2: command[1].find('")')]
+
+        args = self.parse(arg)
+        input_cmd = "{} {}".format(command[0], id_obj)
+
+        if command[1] == 'all()':
             self.do_all(args[0])
+        elif command[1] == 'count()':
+            self.count(args[0])
+        elif do_cmd == "show":
+            self.do_show(input_cmd)
+
+    def parse(self, arg):
+        """ This method divides the arguments of the input command line """
+        new_s = ""
+        prefix = ("\"", ".", "(", ")", ",")
+        for char in arg:
+            if char in prefix:
+                new_s += " "
+            else:
+                new_s += char
+        return (split(new_s))
 
 
 if __name__ == "__main__":

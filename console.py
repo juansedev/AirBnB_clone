@@ -144,8 +144,8 @@ class HBNBCommand(cmd.Cmd):
         do_cmd = command[1][0:command[1].find('("')]
         id_obj = command[1][command[1].find('("') + 2: command[1].find('")')]
 
-        args = self.parse(arg)
         input_cmd = "{} {}".format(command[0], id_obj)
+        args = self.parse(arg)
 
         if command[1] == 'all()':
             self.do_all(args[0])
@@ -153,6 +153,12 @@ class HBNBCommand(cmd.Cmd):
             self.count(args[0])
         elif do_cmd == "show":
             self.do_show(input_cmd)
+        elif do_cmd == "destroy":
+            self.do_destroy(input_cmd)
+        elif do_cmd == "update":
+            input_st = "{} {} {} {}".format(args[0], args[2], args[3], args[4])
+            print(input_st)
+            self.do_update(input_st)
 
     def parse(self, arg):
         """ This method divides the arguments of the input command line """
@@ -163,7 +169,9 @@ class HBNBCommand(cmd.Cmd):
                 new_s += " "
             else:
                 new_s += char
-        return (split(new_s))
+        args = split(new_s)
+        print(args)
+        return args
 
 
 if __name__ == "__main__":

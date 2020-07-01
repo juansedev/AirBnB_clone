@@ -126,6 +126,12 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def default(self, arg):
+        """ This method validates the command line input and executes it """
+        args = split(arg.replace(".", " "))
+        if args[1] == 'all()':
+            self.do_all(args[0])
+
 
 if __name__ == "__main__":
     """ Main method """

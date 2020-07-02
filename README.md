@@ -28,17 +28,17 @@ The command line interface allows the use of CRUD operations on the data objects
 
 ## Classes Table
 
-N°|File|Description
+N° |Class|Description
 ---|---|---
-1|[README.md](./README.md)|Readme.
-2|[0-bubble_sort.c](./0-bubble_sort.c)|Bubble Sort Algorithm
-3|[0-O](./0-O)|Big O notations of the time complexity of the Bubble Sort Algorithm
-4|[1-insertion_sort_list.c](./1-insertion_sort_list.c)|Insertion Sort Algorithm
-5|[1-O](./1-O)|Big O notations of the time complexity of the Insertion Sort Algorithm
-6|[2-selection_sort.c](./2-selection_sort.c)|Selection Sort Algorithm
-7|[2-O](./2-O)|Big O notations of the time complexity of the Selection Sort Algorithm
-8|[3-quick_sort.c](./3-quick_sort.c)|Quick Sort Algorithm
-9|[3-O](./3-O)|Big O notations of the time complexity of the Quick Sort Algorithm
+1|[Console](./console.py)|This is the command line interpreter
+2|[FileStorage](./models/engine/file_storage.py)|FileStorage class that serializes instances to a JSON file and deserializes JSON file to instances.
+3|[BaseModel](./models/base_model.py)|This is the BaseModel class from which the other classes will inherit
+4|[Amenity](./models/amenity.py)|Amenity Class
+5|[User](./models/user.py)|User Class
+6|[Place](./models/place.py)|Place Class
+7|[State](./models/state.py)|State Class
+8|[Review](./models/review.py)|Review Class
+9|[Test](./tests/test_models/)|Unittest for each class
 
 ## Storage
 
@@ -70,7 +70,7 @@ N°|Command|Description
 5|`update <class name> <id> <attribute name> "<attribute value>"` or `<class name>.update(<id>, <attribute name>, <attribute value>)`|Updates an instance based on the class name and id.
 6|`<class name>.count()`|Retrieves the number of instances of a class.
 7|`quit` or `EOF`|Exits the console.
-7|`help` or `help <command>`|Lists all the commands.
+8|`help` or `help <command>`|Lists all the commands.
 
 
 ## How to start it
@@ -139,8 +139,21 @@ $
 ```
 
 ## Examples
-COMPLEMENTAR CON DESCRIPCIÓN Y LOS GIFS ;)
-
+<p align="center">
+  <img src="https://github.com/llanojs/Readme_template/blob/master/images/console_airbnb_1.gif"  target="_blank" />
+</p>
+<p align="center">
+  <img src="https://github.com/llanojs/Readme_template/blob/master/images/console_airbnb_2.gif"  target="_blank" />
+</p>
+<p align="center">
+  <img src="https://github.com/llanojs/Readme_template/blob/master/images/console_airbnb_3.gif"  target="_blank" />
+</p>
+<p align="center">
+  <img src="https://github.com/llanojs/Readme_template/blob/master/images/console_airbnb_4.gif"  target="_blank" />
+</p>
+<p align="center">
+  <img src="https://github.com/llanojs/Readme_template/blob/master/images/console_airbnb_5.gif"  target="_blank" />
+</p>
 ---
 
 

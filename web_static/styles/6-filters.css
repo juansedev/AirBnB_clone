@@ -37,6 +37,8 @@ ul {
     width: 100%;
     border-radius: 4px;
     margin-top: -39%;
+    opacity: 0.99;
+    z-index: 1;
 }
 
 .amenities:hover .popover,

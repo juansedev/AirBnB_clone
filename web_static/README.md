@@ -24,6 +24,10 @@ This is a website clone of AirBnB, with the fundamental features implemented. It
 
 In this time I did the front-end(web static) for te AirBnB-clone project using Html and CSS.
 
+<p align="center">
+  <img src="https://github.com/llanojs/Readme_template/blob/master/images/web_static_hbnb_project.png"  target="_blank" />
+</p>
+
 # Files
 
 ## Files
